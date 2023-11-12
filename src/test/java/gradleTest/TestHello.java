@@ -14,6 +14,7 @@ public class TestHello
     @Test
     public void testHelloWorld()
     {
+        // Cache standard output
         PrintStream originalOut = System.out;
 
         // Redirect System.out to a different stream to catch outputs and to check them later
@@ -23,7 +24,7 @@ public class TestHello
         // action
         Hello.main(null);
 
-        // Read bytes
+        // Read outputs
         byte[] outputBytes = bos.toByteArray();
         ByteArrayInputStream bin = new ByteArrayInputStream(outputBytes);
         Scanner sc = new Scanner(bin);
@@ -32,7 +33,7 @@ public class TestHello
         Assertions.assertTrue(sc.hasNextLine());
         Assertions.assertEquals("Hello world!", sc.nextLine());
 
-        // undo the binding in System
+        // restore original streams
         System.setOut(originalOut);
     }
 }
